@@ -35,11 +35,11 @@ export class BookCategoryController {
     @Param('id') id: string,
     @Body() updateBookCategoryDto: UpdateBookCategoryDto,
   ) {
-    return this.bookCategoryService.update(+id, updateBookCategoryDto);
+    return this.bookCategoryService.update(id, updateBookCategoryDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.bookCategoryService.remove(+id);
+    return this.bookCategoryService.remove(id);
   }
 }
