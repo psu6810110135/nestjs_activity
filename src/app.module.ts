@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BookCategoryModule } from './book-category/book-category.module';
+import { BookModule } from './book/book.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { BookCategoryModule } from './book-category/book-category.module';
       synchronize: true, // สร้าง Table อัตโนมัติ (ใช้สำหรับ Dev เท่านั้น)
     }),
     BookCategoryModule,
+    BookModule,
   ],
 })
 export class AppModule {}
