@@ -46,8 +46,8 @@ export class UsersService {
     return this.userRepository.findOneBy({ id });
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return await this.userRepository.find();
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {
