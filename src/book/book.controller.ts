@@ -15,6 +15,7 @@ import { UserRole } from 'src/users/entities/user.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from 'src/auth/roles.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
+import { CurrentUser } from 'src/auth/current-user.decorator';
 
 @Controller('book')
 export class BookController {
@@ -45,6 +46,12 @@ export class BookController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.bookService.remove(id);
+  }
+
+  @UseGuards(AuthGuard('jwt')) // ต้อง Login ก่อนถึงจะ Like ได้ (ทั้ง Admin/User)
+  @Patch(':id/like')
+  async toggleLike(@Param('id') id: string, @CurrentUser() user: any) {
+    return this.bookService.toggleLike(id, user.userId);
   }
   @Get(':id')
   findOne(@Param('id') id: string) {
