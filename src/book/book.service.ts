@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
-import { InjectRepository } from '@nestjs/typeorm'; 
+import { InjectRepository } from '@nestjs/typeorm';
 import { Book } from './entities/book.entity';
 import { Repository } from 'typeorm';
 
@@ -22,7 +22,6 @@ export class BookService {
     });
   }
 
-
   findOne(id: string) {
     return this.bookRepository.findOne({
       where: { id },
@@ -30,9 +29,8 @@ export class BookService {
     });
   }
 
-
   async incrementLikes(id: string) {
-    const book = await this.findOne(id); 
+    const book = await this.findOne(id);
     if (!book) {
       throw new NotFoundException(`Book with ID ${id} not found`);
     }
@@ -40,11 +38,9 @@ export class BookService {
     return this.bookRepository.save(book);
   }
 
-
   update(id: string, updateBookDto: UpdateBookDto) {
     return this.bookRepository.update(id, updateBookDto);
   }
-
 
   remove(id: string) {
     return this.bookRepository.delete(id);
